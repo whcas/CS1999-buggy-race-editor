@@ -29,7 +29,7 @@ def create_buggy():
     try:
       qty_wheels = 0
       qty_wheels = int(request.form['qty_wheels'])
-      if (qty_wheels % 2 != 0) or (qty_wheels <= 4):
+      if (qty_wheels % 2 != 0) or (qty_wheels < 4):
         raise Exception('Invalid number of wheels')
       msg = f"qty_wheels={qty_wheels}"
       with sql.connect(DATABASE_FILE) as con:
