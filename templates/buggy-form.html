@@ -8,6 +8,151 @@
   <form action="/new" method="post">
     <label for="qty_wheels">Number of wheels:</label>
     <input type="text" name="qty_wheels" value="4"/><br></br>
+    <label for="power_type">Primary motive power:</label>
+    <select name="power_type" id="">
+      <option value="petrol">Petrol</option>
+      <option value="fusion">Fusion reactor</option>
+      <option value="steam">Steam engine</option>
+      <option value="bio">Bio-fuel</option>
+      <option value="electric">Lithium-ion</option>
+      <option value="rocket">Rocket fuel</option>
+      <option value="hamster">Hamster</option>
+      <option value="thermo">Thermonuclear reactor</option>
+      <option value="solar">Solar panels</option>
+      <option value="wind">Sailing rig</option>
+    </select><br></br>
+    <label for="power_units">Primary motive power units:</label>
+    <input type="text" name="power_units" value="1"/><br></br>
+    <label for="aux_power_type">Auxiliary motive power:</label>
+    <select name="aux_power_type" id="">
+      <option value="null">None</option>
+      <option value="petrol">Petrol</option>
+      <option value="fusion">Fusion reactor</option>
+      <option value="steam">Steam engine</option>
+      <option value="bio">Bio-fuel</option>
+      <option value="electric">Lithium-ion</option>
+      <option value="rocket">Rocket fuel</option>
+      <option value="hamster">Hamster</option>
+      <option value="thermo">Thermonuclear reactor</option>
+      <option value="solar">Solar panels</option>
+      <option value="wind">Sailing rig</option>
+    </select><br></br>
+    <label for="aux_power_units">Auxiliary motive power units:</label>
+    <input type="text" name="aux_power_units" value="0"/><br></br>
+    <label for="hamster_booster">Hamster booster:</label>
+    <input type="text" name="hamster_booster" value="0"/><br></br>
+    <label for="flag_color">Flag's colour:</label>
+    <select name="flag_color" id="">
+      <option class="colour" value="#ffffff" style=background-color:#ffffff;color:#000000>White</option>
+      <option class="colour" value="#ff0000" style=background-color:#ff0000;color:red>Red</option>
+      <option class="colour" value="#ff8000" style=background-color:#ff8000;color:#ff8000>Orange</option>
+      <option class="colour" value="#ffff00" style=background-color:#ffff00;color:#ffff00>Yellow</option>
+      <option class="colour" value="#00ff00" style=background-color:#00ff00;color:#00ff00>Green</option>
+      <option class="colour" value="#0000ff" style=background-color:#0000ff;color:#0000ff>Blue</option>
+      <option class="colour" value="#4B0082" style=background-color:#4B0082;color:#4B0082>Indigo</option>
+      <option class="colour" value="#7F00FF" style=background-color:#7F00FF;color:#7F00FF>Violet</option>
+      <option class="colour" value="#000000" style=background-color:#000000;color:#000000>Black</option>
+    </select><br></br>
+    <!-- <select name="flag_color" id="colour_me">
+      <option class="colour" value="#ffffff" style=background-color:#ffffff></option>
+      <option class="colour" value="#ff0000" style=background-color:#ff0000></option>
+      <option class="colour" value="#ff8000" style=background-color:#ff8000></option>
+      <option class="colour" value="#ffff00" style=background-color:#ffff00></option>
+      <option class="colour" value="#00ff00" style=background-color:#00ff00></option>
+      <option class="colour" value="#0000ff" style=background-color:#0000ff></option>
+      <option class="colour" value="#4B0082" style=background-color:#4B0082></option>
+      <option class="colour" value="#7F00FF" style=background-color:#7F00FF></option>
+      <option class="colour" value="#000000" style=background-color:#000000></option>
+    </select><br></br> -->
+    <label for="flag_pattern">Flag's pattern:</label>
+    <select name="flag_pattern" id="">
+      <option value="plain">Plain</option>
+      <option value="vstripe">V Stripe</option>
+      <option value="hstripe">H Stripe</option>
+      <option value="dstripe">D Stripe</option>
+      <option value="checker">Checker</option>
+      <option value="spot">Spot</option>
+    </select><br></br>
+    <label for="flag_color_secondary">Flag's other colour:</label>
+    <select name="flag_color" id="">
+      <option class="colour" value="#000000" style=background-color:#000000;color:#000000>Black</option>
+      <option class="colour" value="#ff0000" style=background-color:#ff0000;color:#ff0000>Red</option>
+      <option class="colour" value="#ff8000" style=background-color:#ff8000;color:#ff8000>Orange</option>
+      <option class="colour" value="#ffff00" style=background-color:#ffff00;color:#ffff00>Yellow</option>
+      <option class="colour" value="#00ff00" style=background-color:#00ff00;color:#00ff00>Green</option>
+      <option class="colour" value="#0000ff" style=background-color:#0000ff;color:#0000ff>Blue</option>
+      <option class="colour" value="#4B0082" style=background-color:#4B0082;color:#4B0082>Indigo</option>
+      <option class="colour" value="#7F00FF" style=background-color:#7F00FF;color:#7F00FF>Violet</option>
+      <option class="colour" value="#ffffff" style=background-color:#ffffff;color:#ffffff>White</option>
+    </select><br></br>
+    <!-- <select name="flag_color" id="colour_me">
+      <option class="colour" value="#000000" style=background-color:#000000></option>
+      <option class="colour" value="#ff0000" style=background-color:#ff0000></option>
+      <option class="colour" value="#ff8000" style=background-color:#ff8000></option>
+      <option class="colour" value="#ffff00" style=background-color:#ffff00></option>
+      <option class="colour" value="#00ff00" style=background-color:#00ff00></option>
+      <option class="colour" value="#0000ff" style=background-color:#0000ff></option>
+      <option class="colour" value="#4B0082" style=background-color:#4B0082></option>
+      <option class="colour" value="#7F00FF" style=background-color:#7F00FF></option>
+      <option class="colour" value="#ffffff" style=background-color:#ffffff></option>
+    </select><br></br> -->
+    <label for="tyres">Types of tyres:</label>
+    <select name="tyres" id="">
+      <option value="knobbly">Knobbly</option>
+      <option value="slick">Slick</option>
+      <option value="steelband">Steelband</option>
+      <option value="reactive">Reactive</option>
+      <option value="maglev">Maglev</option>
+    </select><br></br>
+    <label for="qty_tyres">Number of tyres:</label>
+    <input type="text" name="qty_tyres" value="4"/><br></br>
+    <label for="armour">Armour:</label>
+    <select name="armour" id="">
+      <option value="none">None</option>
+      <option value="wood">Wood</option>
+      <option value="aluminium">Aluminium</option>
+      <option value="thinsteel">Thinsteel</option>
+      <option value="thicksteel">Thicksteel</option>
+      <option value="titanium">Titanium</option>
+    </select><br></br>
+    <label for="attack">Offensive capability:</label>
+    <select name="attack" id="">
+      <option value="none">None</option>
+      <option value="spike">Spike</option>
+      <option value="flame">Flame</option>
+      <option value="charge">Charge</option>
+      <option value="biohazard">Biohazard</option>
+    </select><br></br>
+    <label for="qty_attacks">Number of attacks:</label>
+    <input type="text" name="qty_attacks" value="0"/><br></br>
+    <label for="fireproof">Fireproof:</label>
+    <select name="fireproof" id="">
+      <option value="false">False</option>
+      <option value="true">True</option>
+    </select><br></br>
+    <label for="insulated">Insulated:</label>
+    <select name="insulated" id="">
+      <option value="false">False</option>
+      <option value="true">True</option>
+    </select><br></br>
+    <label for="antibiotic">Antibiotic:</label>
+    <select name="antibiotic" id="">
+      <option value="false">False</option>
+      <option value="true">True</option>
+    </select><br></br>
+    <label for="banging">Banging sound system:</label>
+    <select name="banging" id="">
+      <option value="false">False</option>
+      <option value="true">True</option>
+    </select><br></br>
+    <label for="algo">Race computer algorithm:</label>
+    <select name="algo" id="">
+      <option value="steady">Steady</option>
+      <option value="defensive">Defensive</option>
+      <option value="offensive">Offensive</option>
+      <option value="titfortat">Titfortat</option>
+      <option value="random">Random</option>
+    </select><br></br>
     <input type="submit" class="button">
   </form>
   <p>
