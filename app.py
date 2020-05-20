@@ -27,19 +27,32 @@ def create_buggy():
   elif request.method == 'POST':
     msg=""
     try:
-      qty_wheels = request.form['qty_wheels']
-      msg = f"qty_wheels={qty_wheels}" 
+      qty_wheels = 0
+      qty_wheels = int(request.form['qty_wheels'])
+      if (qty_wheels % 2 != 0) or (qty_wheels <= 4):
+        raise Exception('Invalid number of wheels')
+      msg = f"qty_wheels={qty_wheels}"
       with sql.connect(DATABASE_FILE) as con:
         cur = con.cursor()
         cur.execute("UPDATE buggies set qty_wheels=? WHERE id=?", (qty_wheels, DEFAULT_BUGGY_ID))
         con.commit()
         msg = "Record successfully saved"
+    except ValueError:
+      msg = ('The NUMBER of wheels has to be an integer!')
+    except Exception:
+      if (qty_wheels % 2 != 0):
+        msg = "Wheels not even!"
+      elif (qty_wheels < 4):
+        msg = "Not enough wheels!"
     except:
       con.rollback()
       msg = "error in update operation"
     finally:
-      con.close()
-      return render_template("updated.html", msg = msg)
+      try:
+        con.close()
+      except:
+        pass
+    return render_template("updated.html", msg = msg)
 
 #------------------------------------------------------------
 # a page for displaying the buggy
@@ -50,7 +63,7 @@ def show_buggies():
   con.row_factory = sql.Row
   cur = con.cursor()
   cur.execute("SELECT * FROM buggies")
-  record = cur.fetchone(); 
+  record = cur.fetchone();
   return render_template("buggy.html", buggy = record)
 
 #------------------------------------------------------------
