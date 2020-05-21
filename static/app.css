@@ -9,7 +9,7 @@ body {
   font-size: 1.2em;
   color: #000000;
   background: repeating-linear-gradient(
-    45deg,
+    -45deg,
     #ffffee,
     #ffffee 2em,
     #eeeeee 2em,
@@ -61,4 +61,11 @@ table td, table th {
 }
 .spacer {
   margin: 3em 0;
+}
+select {
+  padding: 0.5em;
+  font-size:100%
+}
+option.colour {
+  width: 10em;
 }
