@@ -42,11 +42,24 @@ def create_buggy():
     armour = request.form['armour']
     attack = request.form['attack']
     qty_attacks = 0
-    fireproof = request.form['fireproof']
-    insulated = request.form['insulated']
-    antibiotic = request.form['antibiotic']
-    banging = request.form['banging']
     algo = request.form['algo']
+  
+    if request.form['fireproof'] == "true":
+      fireproof = 1
+    else:
+      fireproof = 0
+    if request.form['insulated'] == "true":
+      insulated = 1
+    else:
+      insulated = 0
+    if request.form['antibiotic'] == "true":
+      antibiotic = 1
+    else:
+      antibiotic = 0
+    if request.form['banging'] == "true":
+      banging = 1
+    else:
+      banging = 0
 
     try:
       qty_wheels = int(request.form['qty_wheels'])
