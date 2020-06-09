@@ -63,9 +63,45 @@ table td, table th {
   margin: 3em 0;
 }
 select {
-  padding: 0.5em;
-  font-size:100%
+  border: 0px;
+  background-color: rgba(255, 255, 255, 0.8);
+  font-size:100%;
+  width: 10em;
 }
 option.colour {
   width: 10em;
+}
+input.grid {
+  background-color: rgba(255, 255, 255, 0.8);
+  border: 0px;
+  width: 10em;
+}
+.column {
+  float: left;
+  width: 50%;
+}
+label {
+  font-size:32px
+}
+.grid-container{
+  display: grid;
+  grid-template-columns: auto auto auto;
+  grid-gap: 10px;
+  background-color: #2196F3;
+  padding: 10px;
+}
+.grid-container > div {
+  background-color: rgba(255, 255, 255, 0.8);
+  text-align: center;
+  padding: 20px 0;
+  font-size: 30px;
+}
+
+.grid-label{
+  grid-column-start: 1;
+  grid-column-end: 3;
+}
+.grid-entry{
+  grid-column-start: 3;
+  grid-column-end: 4;
 }
