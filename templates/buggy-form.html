@@ -10,8 +10,11 @@
     {% else %}
       Make buggy
     {% endif %}
+    <!-- Displays a title depending on whether you're editing or moulding a new creation 
+         again using the trick that the default buggies id is -1 -->
   </h1>
   
+  <!-- I decided to used a grid container because it was a good compromise between looks and not being too much of a pain in the backside -->
 
   <form action="/new" method="post">
     <input type="hidden" name="id" value="{{ buggy['id']}}" />
@@ -32,6 +35,8 @@
           <option value="solar">Solar panels</option>
           <option value="wind">Sailing rig</option>
           <option value="{{ buggy['power_type']}}" style="display:none;" selected="selected"> {{ buggy['power_type']}} </option>
+          <!-- This last option is so that when editing the selects will automaticaly be on the previosly selected option
+               I'm aware that instead of using the original text it will now us the value version so instead of Lithion-ion it will say electric -->
         </select> 
       </div>
       <div class="grid-label"> <label for="power_units">Primary motive power units:</label> </div>

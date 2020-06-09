@@ -5,6 +5,9 @@ app = Flask(__name__)
 DATABASE_FILE = "database.db"
 DEFAULT_BUGGY_ID = "1"
 
+#------------------------------------------------------------
+# the defult buggy contains the values of a default buggy
+#------------------------------------------------------------
 DEFAULT_BUGGY = {"id":-1, "qty_wheels":"4", "power_type":"petrol", "power_units":"1", "aux_power_type":"", "aux_power_units":"0", "hamster_booster":"0", "flag_color":"white", "flag_pattern":"plain", "flag_color_secondary":"black", "tyres":"knobbly", "qty_tyres":"4", "armour":"none", "attack":"none", "qty_attacks":"0", "fireproof":"false", "insulated":"false", "antibiotic":"false", "banging":"false", "algo":"steady", }
 
 BUGGY_RACE_SERVER_URL = "http://rhul.buggyrace.net"
@@ -25,17 +28,26 @@ def home():
 @app.route('/new', methods = ['POST', 'GET'])
 def create_buggy():
   if request.method == 'GET':
-    return render_template("buggy-form.html", buggy = DEFAULT_BUGGY)
+    return render_template("buggy-form.html", buggy = DEFAULT_BUGGY) # If the record is new we use the default buggies values
   elif request.method == 'POST':
     with sql.connect(DATABASE_FILE) as con:
       cur = con.cursor()
       cur.execute("SELECT * FROM buggies")
       id = cur.fetchall()
-      CURRENT_BUGGY_ID = id[-1][0] + 1
+      CURRENT_BUGGY_ID = id[-1][0] + 1 
+      #We fetch the id of the last record on the list and add 1
+      #There is probly an easier way
       
-    msg=""
-    ValidCart = True
+    msg=""                  #We add any error messages to this for the user to see if the form doesn't work
+    ValidCart = True        #Used to check if the cart obeys the rules, remains true unless one of the checks fails
 
+
+    #------------------------------------------------------------
+    # We then go though the values on the form
+    # The booleans go from true or false to 1s and 0s as the json demands
+    # If the input is text based we validate the data
+    # We don't validate data from select inputs because it should be one of the presets (I'm pretty sure a user could break this if they wanted to)
+    #------------------------------------------------------------
     qty_wheels = 4
     power_type = request.form['power_type']
     power_units = 1
@@ -143,10 +155,9 @@ def create_buggy():
       try:
         with sql.connect(DATABASE_FILE) as con:
           cur = con.cursor()
-          if int(request.form['id']) < 0:
-            print("fix me im new")
-            cur.execute("INSERT INTO buggies (qty_wheels) VALUES (?)", (qty_wheels,))
-          else:
+          if int(request.form['id']) < 0: #I set the default value of the buggies id to -1 for ease of testing if the record was new or not
+            cur.execute("INSERT INTO buggies (qty_wheels) VALUES (?)", (qty_wheels,)) #Because this started from the defaults it's new and needs to be inserted instead of updating
+          else: #This means the id is not new and this is an edit
             CURRENT_BUGGY_ID = request.form['id']
             print('fix id ', CURRENT_BUGGY_ID)
             cur.execute("UPDATE buggies set qty_wheels=? WHERE id=?", (qty_wheels, CURRENT_BUGGY_ID))
@@ -169,10 +180,10 @@ def create_buggy():
           cur.execute("UPDATE buggies set banging=? WHERE id=?", (banging, CURRENT_BUGGY_ID))
           cur.execute("UPDATE buggies set algo=? WHERE id=?", (algo, CURRENT_BUGGY_ID))
           con.commit()
+
+          #I couldn't find a way to make this look neater, it was this or one very long line and I thought this was the lesser of two evils
+
           msg = "Record successfully saved"
-      # except:
-      #   con.rollback()
-      #   msg = "error in update operation"
       finally:
         try:
           con.close()
@@ -182,6 +193,7 @@ def create_buggy():
 
 #------------------------------------------------------------
 # a page for displaying the buggy
+# now with all you favotate buggies
 #------------------------------------------------------------
 @app.route('/buggy')
 def show_buggies():
@@ -193,7 +205,7 @@ def show_buggies():
   return render_template("buggy.html", buggies = records)
 
 #------------------------------------------------------------
-# a page for displaying the buggy
+# a pass through to the buggy form which passes the relevant record
 #------------------------------------------------------------
 @app.route('/edit/<buggy_id>')
 def edit_buggy(buggy_id):
@@ -216,24 +228,17 @@ def summary():
   con = sql.connect(DATABASE_FILE)
   con.row_factory = sql.Row
   cur = con.cursor()
-  cur.execute("SELECT * FROM buggies")
-  records = cur.fetchall()
-  for record in records:
-    try:
-        return jsonify(
-          {k: v for k, v in dict(zip(
-            [column[0] for column in cur.description], cur.fetchone())).items()
-            if (v != "" and v is not None)
-          }
-        )
-    except:
-      pass
+  cur.execute("SELECT * FROM buggies WHERE id=? LIMIT 1", (DEFAULT_BUGGY_ID))
+  return jsonify(
+      {k: v for k, v in dict(zip(
+        [column[0] for column in cur.description], cur.fetchone())).items()
+        if (v != "" and v is not None)
+      }
+    )
 
 #------------------------------------------------------------
 # delete the buggy
-#   don't want DELETE here, because we're anticipating
-#   there always being a record to update (because the
-#   student needs to change that!)
+# now redirects you back to the buggy page for easier mass cullings
 #------------------------------------------------------------
 @app.route('/delete/<buggy_id>')
 def delete_buggy(buggy_id):
