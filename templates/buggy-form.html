@@ -3,15 +3,24 @@
 {% extends "base.html" %}
 
 {% block content %}
+  
+  <h1>
+    {% if buggy['id'] > 0 %}
+      Edit buggy #{{ buggy['id']}}
+    {% else %}
+      Make buggy
+    {% endif %}
+  </h1>
+  
 
-  <h1>Make buggy</h1>
   <form action="/new" method="post">
+    <input type="hidden" name="id" value="{{ buggy['id']}}" />
     <div class="grid-container">
       <div class="grid-label"> <label for="qty_wheels">Number of wheels:</label> </div>
-      <div class="grid-entry"> <input class="grid" type="text" name="qty_wheels" value="4"/> </div>
+      <div class="grid-entry"> <input class="grid" type="text" name="qty_wheels" value="{{ buggy['qty_wheels']}}"/> </div>
       <div class="grid-label"> <label for="power_type">Primary motive power:</label> </div>
       <div class="grid-entry"> 
-        <select name="power_type" id="">
+        <select name="power_type" id="" value="fixme">
           <option value="petrol">Petrol</option>
           <option value="fusion">Fusion reactor</option>
           <option value="steam">Steam engine</option>
@@ -22,10 +31,11 @@
           <option value="thermo">Thermonuclear reactor</option>
           <option value="solar">Solar panels</option>
           <option value="wind">Sailing rig</option>
+          <option value="{{ buggy['power_type']}}" style="display:none;" selected="selected"> {{ buggy['power_type']}} </option>
         </select> 
       </div>
       <div class="grid-label"> <label for="power_units">Primary motive power units:</label> </div>
-      <div class="grid-entry"> <input class="grid" type="text" name="power_units" value="1"/> </div>
+      <div class="grid-entry"> <input class="grid" type="text" name="power_units" value="{{ buggy['power_units']}}"/> </div>
       <div class="grid-label"> <label for="aux_power_type">Auxiliary motive power:</label> </div>
       <div class="grid-entry">
         <select name="aux_power_type" id="">
@@ -40,12 +50,13 @@
           <option value="thermo">Thermonuclear reactor</option>
           <option value="solar">Solar panels</option>
           <option value="wind">Sailing rig</option>
+          <option value="{{ buggy['aux_power_type']}}" style="display:none;" selected="selected"> {{ buggy['aux_power_type']}} </option>
         </select> 
       </div>
       <div class="grid-label"> <label for="aux_power_units">Auxiliary motive power units:</label> </div>
-      <div class="grid-entry"> <input class="grid" type="text" name="aux_power_units" value="0"/> </div>
+      <div class="grid-entry"> <input class="grid" type="text" name="aux_power_units" value="{{ buggy['aux_power_units']}}"/> </div>
       <div class="grid-label"> <label for="hamster_booster">Hamster booster:</label> </div>
-      <div class="grid-entry"> <input class="grid" type="text" name="hamster_booster" value="0"/> </div>
+      <div class="grid-entry"> <input class="grid" type="text" name="hamster_booster" value="{{ buggy['hamster_booster']}}"/> </div>
       <div class="grid-label"> <label for="flag_color">Flag's colour:</label> </div>
       <div class="grid-entry"> 
         <select name="flag_color" id="">
@@ -58,6 +69,7 @@
           <option class="colour" value="#4B0082" style=background-color:#4B0082;color:#4B0082>Indigo</option>
           <option class="colour" value="#7F00FF" style=background-color:#7F00FF;color:#7F00FF>Violet</option>
           <option class="colour" value="#000000" style=background-color:#000000;color:#000000>Black</option>
+          <option value="{{ buggy['flag_color']}}" style="display:none;" selected="selected"> {{ buggy['flag_color']}} </option>
         </select>
       </div>
       <div class="grid-label"> <label for="flag_pattern">Flag's pattern:</label> </div>
@@ -69,6 +81,7 @@
           <option value="dstripe">D Stripe</option>
           <option value="checker">Checker</option>
           <option value="spot">Spot</option>
+          <option value="{{ buggy['flag_pattern']}}" style="display:none;" selected="selected"> {{ buggy['flag_pattern']}} </option>
         </select> 
       </div>
       <div class="grid-label"> <label for="flag_color_secondary">Flag's other colour:</label> </div>
@@ -83,6 +96,7 @@
           <option class="colour" value="#4B0082" style=background-color:#4B0082;color:#4B0082>Indigo</option>
           <option class="colour" value="#7F00FF" style=background-color:#7F00FF;color:#7F00FF>Violet</option>
           <option class="colour" value="#ffffff" style=background-color:#ffffff;color:#ffffff>White</option>
+          <option value="{{ buggy['flag_color_secondary']}}" style="display:none;" selected="selected"> {{ buggy['flag_color_secondary']}} </option>
         </select> 
       </div>
       <div class="grid-label"> <label for="tyres">Types of tyres:</label> </div>
@@ -93,10 +107,11 @@
           <option value="steelband">Steelband</option>
           <option value="reactive">Reactive</option>
           <option value="maglev">Maglev</option>
+          <option value="{{ buggy['tyres']}}" style="display:none;" selected="selected"> {{ buggy['tyres']}} </option>
         </select> 
       </div>
       <div class="grid-label"> <label for="qty_tyres">Number of tyres:</label> </div>
-      <div class="grid-entry"> <input class="grid" type="text" name="qty_tyres" value="4"/> </div>
+      <div class="grid-entry"> <input class="grid" type="text" name="qty_tyres" value="{{ buggy['qty_tyres']}}"/> </div>
       <div class="grid-label"> <label for="armour">Armour:</label> </div>
       <div class="grid-entry"> 
         <select name="armour" id="">
@@ -106,6 +121,7 @@
           <option value="thinsteel">Thinsteel</option>
           <option value="thicksteel">Thicksteel</option>
           <option value="titanium">Titanium</option>
+          <option value="{{ buggy['armour']}}" style="display:none;" selected="selected"> {{ buggy['armour']}} </option>
         </select> 
       </div>
       <div class="grid-label"> <label for="attack">Offensive capability:</label> </div>
@@ -116,15 +132,17 @@
           <option value="flame">Flame</option>
           <option value="charge">Charge</option>
           <option value="biohazard">Biohazard</option>
+          <option value="{{ buggy['attack']}}" style="display:none;" selected="selected"> {{ buggy['attack']}} </option>
         </select> 
       </div>
       <div class="grid-label"> <label for="qty_attacks">Number of attacks:</label> </div>
-      <div class="grid-entry"> <input class="grid" type="text" name="qty_attacks" value="0"/> </div>
+      <div class="grid-entry"> <input class="grid" type="text" name="qty_attacks" value="{{ buggy['qty_attacks']}}"/> </div>
       <div class="grid-label"> <label for="fireproof">Fireproof:</label> </div>
       <div class="grid-entry"> 
         <select name="fireproof" id="">
           <option value="false">False</option>
           <option value="true">True</option>
+          <option value="{{ buggy['fireproof']}}" style="display:none;" selected="selected"> {{ buggy['fireproof']}} </option>
         </select> 
       </div>
       <div class="grid-label"> <label for="insulated">Insulated:</label> </div>
@@ -132,6 +150,7 @@
         <select name="insulated" id="">
           <option value="false">False</option>
           <option value="true">True</option>
+          <option value="{{ buggy['insulated']}}" style="display:none;" selected="selected"> {{ buggy['insulated']}} </option>
         </select> 
       </div>
       <div class="grid-label"> <label for="antibiotic">Antibiotic:</label> </div>
@@ -139,6 +158,7 @@
         <select name="antibiotic" id="">
           <option value="false">False</option>
           <option value="true">True</option>
+          <option value="{{ buggy['antibiotic']}}" style="display:none;" selected="selected"> {{ buggy['antibiotic']}} </option>
         </select> 
       </div>
       <div class="grid-label"> <label for="banging">Banging sound system:</label> </div>
@@ -146,6 +166,7 @@
         <select name="banging" id="">
           <option value="false">False</option>
           <option value="true">True</option>
+          <option value="{{ buggy['banging']}}" style="display:none;" selected="selected"> {{ buggy['banging']}} </option>
         </select> 
       </div>
       <div class="grid-label"> <label for="algo">Race computer algorithm:</label> </div>
@@ -156,6 +177,7 @@
           <option value="offensive">Offensive</option>
           <option value="titfortat">Titfortat</option>
           <option value="random">Random</option>
+          <option value="{{ buggy['algo']}}" style="display:none;" selected="selected"> {{ buggy['algo']}} </option>
         </select> 
       </div>
     </div>
